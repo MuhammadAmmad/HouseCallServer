@@ -13,7 +13,7 @@ var cloudant;
 var fileToUpload;
 
 var dbCredentials = {
-	dbName : 'my_sample_db'
+	dbName : 'house_call_db'
 };
 
 var bodyParser = require('body-parser');
@@ -76,27 +76,27 @@ function initDBConnection() {
 		// Variables section for an app in the Bluemix console dashboard).
 		// Alternately you could point to a local database here instead of a 
 		// Bluemix service.
-		//dbCredentials.host = "REPLACE ME";
-		//dbCredentials.port = REPLACE ME;
-		//dbCredentials.user = "REPLACE ME";
-		//dbCredentials.password = "REPLACE ME";
-		//dbCredentials.url = "REPLACE ME";
+		dbCredentials.host = "c9658143-e40c-4bcf-8c33-716ce861d388-bluemix.cloudant.com";
+		dbCredentials.port = "443";
+		dbCredentials.user = "c9658143-e40c-4bcf-8c33-716ce861d388-bluemix";
+		dbCredentials.password = "e2ac6c7302bf3152db163881068c7ac19b205c6be34baf979e280accaa61fba4";
+		dbCredentials.url = "https://c9658143-e40c-4bcf-8c33-716ce861d388-bluemix:e2ac6c7302bf3152db163881068c7ac19b205c6be34baf979e280accaa61fba4@c9658143-e40c-4bcf-8c33-716ce861d388-bluemix.cloudant.com";
 		
-		//cloudant = require('cloudant')(dbCredentials.url);
-		
+		cloudant = require('cloudant')(dbCredentials.url);
+		/*
 		// check if DB exists if not create
-        	//cloudant.db.create(dbCredentials.dbName, function (err, res) {
-        	//    if (err) { console.log('could not create db ', err); }
-        	//});
-            
-        	//db = cloudant.use(dbCredentials.dbName);
+        	cloudant.db.create(dbCredentials.dbName, function (err, res) {
+        	    if (err) { console.log('could not create db ', err); }
+        	});
+            */
+        	db = cloudant.use(dbCredentials.dbName);
 	}
 }
 
 initDBConnection();
 
 app.get('/', routes.index);
-
+/*
 function createResponseData(id, name, value, attachments) {
 
 	var responseData = {
@@ -415,7 +415,7 @@ app.get('/api/favorites', function(request, response) {
 	});
 
 });
-
+*/
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
 	console.log('Express server listening on port ' + app.get('port'));
